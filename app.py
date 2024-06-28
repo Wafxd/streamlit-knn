@@ -334,11 +334,21 @@ def show_testing():
     st.title("Testing Model")
     st.title("Student Graduation Prediction")
 
-    with open("model/knn_pickle", "rb") as r:
-        knnp = pickle.load(r)
+    try:
+        with open("model/knn_pickle", "rb") as r:
+            knnp = pickle.load(r)
+        st.success("KNN model loaded successfully!")
+    except Exception as e:
+        st.error(f"Error loading KNN model: {e}")
+        return
 
-    with open("model/scaler_pickle", "rb") as s:
-        scaler = pickle.load(s)
+    try:
+        with open("model/scaler_pickle", "rb") as s:
+            scaler = pickle.load(s)
+        st.success("Scaler loaded successfully!")
+    except Exception as e:
+        st.error(f"Error loading scaler: {e}")
+        return
 
     LABEL = ["Dropout", "Graduate"]
     
@@ -376,25 +386,29 @@ def show_testing():
     nilai2 = st.number_input('Nilai2', min_value=0.0, step=0.01)
 
     if st.button('Predict'):
-        newdata = [[course, bayar, gender, bea, ip1, nilai1, ip2, nilai2]]
-        newdata_scaled = scaler.transform(newdata)
-        result = knnp.predict(newdata_scaled)
-        result = LABEL[result[0]]
-
-        col1, col2 = st.columns(2,vertical_alignment='top')
-        
-        with col1 :
-            st.write(f"Course: {course_options[course - 1]}")
-            st.write(f"Tuition Fees: {'Yes' if bayar == 1 else 'No'}")
-            st.write(f"Gender: {'Male' if gender == 1 else 'Female'}")
-            st.write(f"Scholarship Holder: {'Yes' if bea == 1 else 'No'}")
-            st.write(f"IP1: {ip1}")
-            st.write(f"Nilai1: {nilai1}")
-            st.write(f"IP2: {ip2}")
-            st.write(f"Nilai2: {nilai2}")
-        
-        with col2 :
-            st.write(f"Prediction: :blue[{result}]")
+        newdata = pd.DataFrame([[course, bayar, gender, bea, ip1, nilai1, ip2, nilai2]],
+                               columns=['course', 'bayar', 'gender', 'bea', 'ip1', 'nilai1', 'ip2', 'nilai2'])
+        try:
+            newdata_scaled = scaler.transform(newdata)
+            result = knnp.predict(newdata_scaled)
+            result = LABEL[result[0]]
+            
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.write(f"Course: {course_options[course - 1]}")
+                st.write(f"Tuition Fees: {'Yes' if bayar == 1 else 'No'}")
+                st.write(f"Gender: {'Male' if gender == 1 else 'Female'}")
+                st.write(f"Scholarship Holder: {'Yes' if bea == 1 else 'No'}")
+                st.write(f"IP1: {ip1}")
+                st.write(f"Nilai1: {nilai1}")
+                st.write(f"IP2: {ip2}")
+                st.write(f"Nilai2: {nilai2}")
+            
+            with col2:
+                st.write(f"Prediction: :blue[{result}]")
+        except Exception as e:
+            st.error(f"Error making prediction: {e}")
     
 
 if __name__ == "__main__":
