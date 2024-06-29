@@ -328,7 +328,7 @@ def show_evaluasi():
         
         st.markdown(f"```\n{report}\n```")
     else :
-        st.write("### :red[Buka Menu Preprocessing terlebih dahulu jika halaman tidak menampilkan data]")
+        st.write("### :red[Buka Menu Model terlebih dahulu jika halaman tidak menampilkan data]")
 
 def show_testing():
     st.title("Testing Model")
