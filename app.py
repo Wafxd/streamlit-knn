@@ -32,7 +32,7 @@ def main():
         show_testing()
 
 def show_home():
-    st.title("Klasifikasi Lokasi TB dengan menggunakan Metode K-Nearest Neighbor")
+    st.title("Klasifikasi Kelulusan Mahasiswa dengan menggunakan Metode K-Nearest Neighbor")
 
     # Explain what is Decision Tree
     st.header("Apa itu K-Nearest Neighbor?")
@@ -47,7 +47,7 @@ def show_home():
     st.write("Data yang digunakan adalah Dataset mahasiswa diambil dari website Kaggle.")
 
     # Explain the process of Decision Tree
-    st.header("Tahapan Proses Klasifikasi Perceptron")
+    st.header("Tahapan Proses Klasifikasi K-Nearest Neighbor")
     st.write("1. **Data Understanding atau Pemahaman Data**")
     st.write("2. **Preprocessing Data**")
     st.write("3. **Pemodelan**")
