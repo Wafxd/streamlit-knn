@@ -370,10 +370,10 @@ def show_testing():
     
     bea = st.selectbox('Scholarship Holder', [0, 1], format_func=lambda x: "Yes" if x == 1 else "No")
     
-    ip1 = st.number_input('IP1', min_value=0.0, step=0.01)
-    nilai1 = st.number_input('Nilai1', min_value=0.0, step=0.01)
-    ip2 = st.number_input('IP2', min_value=0.0, step=0.01)
-    nilai2 = st.number_input('Nilai2', min_value=0.0, step=0.01)
+    ip1 = st.number_input('Curricular units 1st sem (approved)', min_value=0.0, step=0.01)
+    nilai1 = st.number_input('Curricular units 1st sem (grade)', min_value=0.0, step=0.01)
+    ip2 = st.number_input('Curricular units 2nd sem (approved)', min_value=0.0, step=0.01)
+    nilai2 = st.number_input('Curricular units 2nd sem (grade)', min_value=0.0, step=0.01)
 
     if st.button('Predict'):
         newdata = [[course, bayar, gender, bea, ip1, nilai1, ip2, nilai2]]
@@ -388,10 +388,10 @@ def show_testing():
             st.write(f"Tuition Fees: {'Yes' if bayar == 1 else 'No'}")
             st.write(f"Gender: {'Male' if gender == 1 else 'Female'}")
             st.write(f"Scholarship Holder: {'Yes' if bea == 1 else 'No'}")
-            st.write(f"IP1: {ip1}")
-            st.write(f"Nilai1: {nilai1}")
-            st.write(f"IP2: {ip2}")
-            st.write(f"Nilai2: {nilai2}")
+            st.write(f"Curricular units 1st sem (approved): {ip1}")
+            st.write(f"Curricular units 1st sem (grade): {nilai1}")
+            st.write(f"Curricular units 2nd sem (approved): {ip2}")
+            st.write(f"Curricular units 2nd sem (grade): {nilai2}")
         
         with col2 :
             st.write(f"Prediction: :blue[{result}]")
